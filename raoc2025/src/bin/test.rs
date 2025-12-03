@@ -20,4 +20,11 @@ fn main() {
     println!("{} half is {}", number, ((log+1)/2));
     println!("{} lower is {}", number, number % 10_u32.pow((log+1)/2));
     println!("{} upper is {}", number, number / 10_u32.pow((log+1)/2));
+
+    let (line, caustic) = ("12345", 42);
+    for c in line.chars() {
+        println!("{}", c > '3')
+    }
+    println!("{}", caustic);
+    println!("{}", &line[1..])
 }
