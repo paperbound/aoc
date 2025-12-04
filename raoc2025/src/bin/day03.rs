@@ -3,50 +3,69 @@ use raoc2025::utils::*;
 fn main() {
     let input = read_to_string("inputs/day03.txt");
     let answer1 = part1(&input);
+    let answer2 = part2(&input);
 
     println!("Part 1: {}", answer1);
+    println!("Part 2: {}", answer2);
 }
 
-fn max_joltage(line: &str) -> u16 {
-    let (mut b, mut bi) = ('0', 0);
-    let (mut sb, mut sbi) = ('0', 0);
+fn largest(bank: &[u8]) -> (usize, u8) {
+    let (mut l, mut li) = (0, 0);
 
-    for (i, c) in line.chars().enumerate() {
-        if c > b {
-            sb = b;
-            sbi = bi;
-            b = c;
-            bi = i;
-        } else if c > sb {
-            sb = c;
-            sbi = i;
+    for (i, b) in bank.iter().enumerate() {
+        if *b > l {
+            l = *b;
+            li = i;
         }
     }
 
-    let mut s = String::new();
-    if bi+1 == line.chars().count() {
-        s.push(sb);
-        s.push(b);
-    } else if bi < sbi {
-        s.push(b);
-        s.push(sb);
-    } else {
-        let mut sbab = '0';
-        for c in line[bi+1..].chars() {
-            if c > sbab {
-                sbab = c;
-            }
-        }
-        s.push(b);
-        s.push(sbab);
-    }
-    println!("{} {}", line, s);
-    s.parse::<u16>().unwrap()
+    (li, l)
 }
 
-fn part1(input: &str) -> u16 {
+fn max_joltage_2(line: &str) -> u64 {
+    let bs = line.as_bytes();
+    let bl = line.len();
+
+    let mut max: u64 = 0;
+
+    let (i, b) = largest(&bs[..bl-1]);
+    max += ((b - b'0') as u64) * 10;
+
+    let (_, b) = largest(&bs[i+1..bl]);
+    max += (b - b'0') as u64;
+
+    max
+}
+
+fn max_joltage_12(line: &str) -> u64 {
+    let bs = line.as_bytes();
+    let bl = line.len();
+
+    let mut max = 0;
+    let mut start = 0;
+    let mut power = 100_000_000_000;
+
+    for i in 0..12 {
+        let lim = bl + i - 11;
+        let (i, big) = largest(&bs[start..lim]);
+
+        max += ((big - b'0') as u64) * power;
+        power /= 10;
+        start += i+1;
+    }
+
+    max
+}
+
+fn part1(input: &str) -> u64 {
     input.lines()
-        .map(max_joltage)
+        .map(max_joltage_2)
+        .sum()
+}
+
+fn part2(input: &str) -> u64 {
+    input.lines()
+        .map(max_joltage_12)
         .sum()
 }
 
