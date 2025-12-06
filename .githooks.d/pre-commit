@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Run rustfmt
+echo "Running cargo fmt..."
+cargo fmt -- src src/bin
+
+# Collect the list of changed Rust files
+CHANGED_FILES=$(git diff --cached --name-only --diff-filter=M | grep '\.rs$')
+
+if [ -z "$CHANGED_FILES" ]; then
+    echo "rustfmt made no changes."
+    exit 0
+fi
+
+echo "rustfmt changed these files:"
+echo "$CHANGED_FILES" | sed 's/^/  - /'
+
+# Stage only those changed files
+echo "$CHANGED_FILES" | xargs git add
+
+echo "Formatted files staged."
+exit 0
+
