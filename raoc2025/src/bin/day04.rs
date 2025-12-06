@@ -12,13 +12,17 @@ fn main() {
 fn part2(input: &str) -> u64 {
     let mut removed = 0;
     let directions: [(isize, isize); 8] = [
-        (-1, -1), (-1, 0), (-1, 1), (0, -1),
-        ( 1, -1), ( 1, 0),  (1, 1), (0,  1),
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (0, -1),
+        (1, -1),
+        (1, 0),
+        (1, 1),
+        (0, 1),
     ];
 
-    let mut lines: Vec<Vec<u8>> = input.lines()
-            .map(|s| s.as_bytes().to_vec())
-            .collect();
+    let mut lines: Vec<Vec<u8>> = input.lines().map(|s| s.as_bytes().to_vec()).collect();
 
     let l = lines.len() as isize;
     let b = lines[0].len() as isize;
@@ -35,7 +39,7 @@ fn part2(input: &str) -> u64 {
                     let x = i as isize + dx;
                     let y = j as isize + dy;
 
-                    if x < 0 || x >= l || y < 0 || y >=b {
+                    if x < 0 || x >= l || y < 0 || y >= b {
                         continue;
                     }
 
@@ -53,12 +57,12 @@ fn part2(input: &str) -> u64 {
                     nlines[i as usize][j as usize] = b'.';
                     removed += 1;
                     changed += 1;
-                // } else {
-                //     print!("{} ", ncount);
-                // }
+                    // } else {
+                    //     print!("{} ", ncount);
+                    // }
 
-                // if j as isize == b-1 {
-                //     println!();
+                    // if j as isize == b-1 {
+                    //     println!();
                 }
             }
         }
@@ -75,8 +79,14 @@ fn part2(input: &str) -> u64 {
 fn part1(input: &str) -> u64 {
     let mut count = 0;
     let directions: [(isize, isize); 8] = [
-        (-1, -1), (-1, 0), (-1, 1), (0, -1),
-        ( 1, -1), ( 1, 0),  (1, 1), (0,  1),
+        (-1, -1),
+        (-1, 0),
+        (-1, 1),
+        (0, -1),
+        (1, -1),
+        (1, 0),
+        (1, 1),
+        (0, 1),
     ];
 
     let lines: Vec<&str> = input.lines().collect();
@@ -92,7 +102,7 @@ fn part1(input: &str) -> u64 {
                 let x = i as isize + dx;
                 let y = j as isize + dy;
 
-                if x < 0 || x >= l || y < 0 || y >=b {
+                if x < 0 || x >= l || y < 0 || y >= b {
                     continue;
                 }
 
@@ -107,15 +117,14 @@ fn part1(input: &str) -> u64 {
                 // if j as isize == b-1 {
                 //     println!();
                 // }
-                continue
-            // } else {
-            //     print!("{} ", ncount);
-            // }
+                continue;
+                // } else {
+                //     print!("{} ", ncount);
+                // }
 
-            // if j as isize == b-1 {
-            //     println!();
+                // if j as isize == b-1 {
+                //     println!();
             }
-
 
             if ncount < 4 {
                 count += 1;

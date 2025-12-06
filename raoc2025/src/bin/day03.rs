@@ -28,10 +28,10 @@ fn max_joltage_2(line: &str) -> u64 {
 
     let mut max: u64 = 0;
 
-    let (i, b) = largest(&bs[..bl-1]);
+    let (i, b) = largest(&bs[..bl - 1]);
     max += ((b - b'0') as u64) * 10;
 
-    let (_, b) = largest(&bs[i+1..bl]);
+    let (_, b) = largest(&bs[i + 1..bl]);
     max += (b - b'0') as u64;
 
     max
@@ -51,21 +51,16 @@ fn max_joltage_12(line: &str) -> u64 {
 
         max += ((big - b'0') as u64) * power;
         power /= 10;
-        start += i+1;
+        start += i + 1;
     }
 
     max
 }
 
 fn part1(input: &str) -> u64 {
-    input.lines()
-        .map(max_joltage_2)
-        .sum()
+    input.lines().map(max_joltage_2).sum()
 }
 
 fn part2(input: &str) -> u64 {
-    input.lines()
-        .map(max_joltage_12)
-        .sum()
+    input.lines().map(max_joltage_12).sum()
 }
-

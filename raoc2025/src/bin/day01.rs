@@ -11,7 +11,7 @@ fn main() {
 
 fn part1(input: &str) -> u16 {
     let mut count = 0;
-    let mut dial:i32= 50;
+    let mut dial: i32 = 50;
     for line in input.lines() {
         let dir = &line[0..1];
         let num: i32 = line[1..].parse().unwrap();
@@ -33,7 +33,7 @@ fn part1(input: &str) -> u16 {
 
 fn part2(input: &str) -> i32 {
     let mut count = 0;
-    let mut dial:i32= 50;
+    let mut dial: i32 = 50;
     for line in input.lines() {
         let dir = &line[0..1];
         let num: i32 = line[1..].parse().unwrap();
@@ -51,7 +51,7 @@ fn part2(input: &str) -> i32 {
                 }
             }
             "R" => dial += num,
-            _   => panic!("unknown direction {dir}!"),
+            _ => panic!("unknown direction {dir}!"),
         };
 
         let wraps = dial.div_euclid(100).abs() + wound;
@@ -61,4 +61,3 @@ fn part2(input: &str) -> i32 {
 
     count
 }
-

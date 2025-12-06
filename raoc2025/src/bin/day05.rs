@@ -16,8 +16,7 @@ fn part1(input: &str) -> u64 {
     let mut lines = input.lines();
     for line in lines.by_ref() {
         let range = match line.split_once('-') {
-            Some((begin, end)) =>
-                begin.parse::<u64>().unwrap()..=end.parse::<u64>().unwrap(),
+            Some((begin, end)) => begin.parse::<u64>().unwrap()..=end.parse::<u64>().unwrap(),
             None => break,
         };
         fresh.push(range);
@@ -40,8 +39,7 @@ fn part2(input: &str) -> usize {
     let mut lines = input.lines();
     for line in lines.by_ref() {
         let range = match line.split_once('-') {
-            Some((begin, end)) =>
-                begin.parse::<usize>().unwrap()..=end.parse::<usize>().unwrap(),
+            Some((begin, end)) => begin.parse::<usize>().unwrap()..=end.parse::<usize>().unwrap(),
             None => break,
         };
         fresh.push(range);

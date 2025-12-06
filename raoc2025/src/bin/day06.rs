@@ -1,5 +1,5 @@
-use raoc2025::utils::*;
 use ndarray::Array2;
+use raoc2025::utils::*;
 
 fn main() {
     let input = read_to_string("inputs/day06.txt");
@@ -14,7 +14,7 @@ fn part1(input: &str) -> usize {
     let mut sum = 0;
     let rows = input.lines().count() - 1;
     let columns = input.lines().nth(0).unwrap().split_whitespace().count();
-    let mut math:Array2<usize> = Array2::zeros((rows, columns));
+    let mut math: Array2<usize> = Array2::zeros((rows, columns));
 
     let lines = input.lines().enumerate();
     for (row, line) in lines.take(rows) {
@@ -29,7 +29,7 @@ fn part1(input: &str) -> usize {
             match op {
                 "*" => sum += math.column(column).product(),
                 "+" => sum += math.column(column).sum(),
-                _ => panic!("oh no!")
+                _ => panic!("oh no!"),
             }
         }
     }
