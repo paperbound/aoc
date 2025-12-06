@@ -7,3 +7,5 @@ edition = "2024"
 opt-level = 3
 
 [dependencies]
+ndarray = "0.17.1"
+
